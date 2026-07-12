@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Asincronía</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen font-sans">
+<div class="max-w-4xl mx-auto p-6">
+  <header class="mb-8 border-b border-gray-700 pb-4">
+    <h1 class="text-3xl font-bold text-blue-400">Asincronía en JavaScript</h1>
+    <p class="text-gray-400 mt-2">Ejecuta cada función para ver cómo evoluciona el código desde bloqueante hasta <strong>async/await</strong>.</p>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col gap-3">
+      <h2 class="text-xl font-semibold mb-3">Ejecutar Funciones</h2>
+
+    </div>
+
+    <div class="bg-black p-4 rounded-lg shadow-lg font-mono text-sm overflow-y-auto h-96 border border-gray-700" id="consola-visual">
+      <div class="text-gray-500">// Esta será nuestra consola, el resultado de cada función irá apareciendo acá...</div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js" type="module"></script>
+</body>
+</html>
