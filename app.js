@@ -10,6 +10,18 @@ const imprimirLog = (message, type = 'info') => {
     consola.scrollTop = consola.scrollHeight;
 };
 
+/* Operador Ternario anidado usado en 'imprimirLog' desmenuzado en IF-ELSE:
+
+    if (type === 'error') {
+       p.className = 'text-red-400 mt-1';
+    } else if (type === 'success') {
+       p.className = 'text-green-400 mt-1';
+    } else {
+       p.className = 'text-gray-300 mt-1';
+    }
+
+* */
+
 const limpiarLog = () => {
     consola.innerHTML = '';
     imprimirLog('Consola Limpiada', 'success');
