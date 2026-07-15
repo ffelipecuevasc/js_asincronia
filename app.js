@@ -59,14 +59,86 @@ const codigoBloqueante = () => {
     },100);
 };
 
+// =========================================================================
+// TEMA 4 - Callback Hell
+// =========================================================================
+const callbackHell = () => {
+    imprimirLog('--- Módulo 4: Callback Hell ---', 'success');
 
 
+    const validarUsuario = (user, callback) => {
+        setTimeout(() => callback(null, { id: 1, nombre: user }), 1000);
+    };
+    const buscarPedido = (userId, callback) => {
+        setTimeout(() => callback(null, { idPedido: 555 }), 1000);
+    };
+    const procesarPago = (pedido, callback) => {
+        setTimeout(() => callback(null, 'Aprobado'), 1000);
+    };
 
 
+    // Pirámide del terror
+    validarUsuario('Ana', (err, user) => {
+        imprimirLog(`Usuario validado: ${user.nombre}`);
+        buscarPedido(user.id, (err, pedido) => {
+            imprimirLog(`Pedido encontrado: #${pedido.idPedido}`);
+            procesarPago(pedido, (err, recibo) => {
+                imprimirLog(`Pago completado. Estado: ${recibo}`, 'success');
+            });
+        });
+    });
+};
 
+// =========================================================================
+// TEMA 5 - Promesas
+// =========================================================================
+const pedirComida = (hayIngredientes) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+                if (hayIngredientes) resolve('Hamburguesa');
+                else reject('Sin ingredientes');
+            }
+            ,2000);
+    });
+};
 
+// Una promesa puede tener 1 de 3 estados = pendiente, cumplida o rechazada.
+const ejecutarPromesas = () => {
+    imprimirLog('--- Tema 5 - Promesas ---', 'success');
+    imprimirLog('Iniciando pedido...')
 
+    // Acá se ejecuta la función automáticamente y devuelve la promesa = PENDING
+    pedirComida(true)
+        .then(comida => {
+            imprimirLog(`Paso 1: Recibido -> ${comida}`);
+            return `${comida} con Papas Fritas`;
+        })
+        .then(combo => {
+            imprimirLog(`Paso 2: Combo final -> ${combo}`, 'success')
+        })
+        .catch((err) => {
+            imprimirLog(`Error crítico: ${err}`, 'error');
+        });
+};
 
+// =========================================================================
+// TEMA 6 - Async / Await
+// =========================================================================
+const ejecutarAsyncAwait = async () => {
+    imprimirLog('--- Tema 6 - Async / Await ---', 'success');
+    imprimirLog('Iniciando proceso asíncrono moderno (ES6+)...');
+    try {
+        // Voy a conectar a una BD pero no quiero esperar todo el tiempo, lo ejecuto AWAIT
+        // Voy a leer un archivo .TXT extenso, pero no quiero esperarlo, lo ejecuto AWAIT
+        const comida = await pedirComida(true);
+        imprimirLog(`Paso 1: Recibido -> ${comida}`);
+
+        const combo = `${comida} con Papas Fritas y Coca-Cola`;
+        imprimirLog(`Paso 2: Recibido -> ${combo}`, 'success');
+    } catch (error) {
+        imprimirLog(`Error capturado: ${error}`, 'error');
+    }
+};
 
 // =========================================================================
 // ASIGNACIÓN DE EVENTOS (Listeners)
@@ -74,15 +146,7 @@ const codigoBloqueante = () => {
 document.getElementById('btn-tema-1').addEventListener('click', asincroniaBasica);
 document.getElementById('btn-tema-2').addEventListener('click', probandoEventLoop);
 document.getElementById('btn-tema-3').addEventListener('click', codigoBloqueante);
-
+document.getElementById('btn-tema-4').addEventListener('click', callbackHell);
+document.getElementById('btn-tema-5').addEventListener('click', ejecutarPromesas);
+document.getElementById('btn-tema-6').addEventListener('click', ejecutarAsyncAwait);
 document.getElementById('btn-limpiar').addEventListener('click', limpiarLog);
-
-
-
-
-
-
-
-
-
-
